@@ -4,164 +4,159 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samhit Nayak - Portfolio</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Use Poppins font and set dark theme as base */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #111827; /* Dark Blue-Gray */
-            color: #d1d5db; /* Light Gray text */
+            background-color: #0c0a18; /* Darker, richer purple-black */
+            color: #d1d5db;
         }
         
-        /* Custom styles for the typing animation cursor */
+        /* Gradient Text Style */
+        .gradient-text {
+            background-image: linear-gradient(45deg, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
         .typing-cursor {
             display: inline-block;
-            width: 2px;
+            width: 3px;
             height: 1.2em;
-            background-color: #f59e0b; /* Amber color */
-            animation: blink 0.7s infinite;
+            background-color: #f59e0b;
+            animation: blink 0.8s infinite;
             margin-left: 4px;
             position: relative;
             top: 4px;
         }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
-        
-        /* Custom styles for the project card overlay */
-        .project-card .overlay {
-            transition: opacity 0.3s ease-in-out;
-        }
-        .project-card:hover .overlay {
-            opacity: 1;
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Custom styles for the timeline */
+        /* Project Card Hover Tilt Effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.25);
+        }
+
+        /* Timeline Styling */
         .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 5px;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background-color: #1f2937; /* Gray-800 */
-            border: 4px solid #f59e0b;
+            content: ''; position: absolute; left: -31px; top: 5px;
+            width: 22px; height: 22px; border-radius: 50%;
+            background-color: #1f2937; border: 4px solid #f59e0b;
         }
         .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: -21px;
-            top: 5px;
-            bottom: 0;
-            width: 2px;
-            background-color: #374151; /* Gray-700 */
+            content: ''; position: absolute; left: -21px; top: 5px;
+            bottom: 0; width: 2px; background-color: #374151;
         }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Animated Skill Bar */
+        .skill-bar-fill {
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1s ease-out;
+        }
+        .is-visible .skill-bar-fill {
+            transform: scaleX(1);
+        }
+
     </style>
 </head>
 <body data-spy="scroll" data-target="#navbar" data-offset="300">
 
-    <!-- Header & Navigation -->
-    <header id="navbar" class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-md">
+    <header id="navbar" class="bg-black/30 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-md">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#home" class="text-2xl font-bold text-white">Samhit Nayak</a>
             <nav class="hidden md:flex space-x-8">
                 <a href="#about" class="text-gray-300 hover:text-amber-400 transition duration-300">About</a>
                 <a href="#resume" class="text-gray-300 hover:text-amber-400 transition duration-300">Resume</a>
-                <a href="#certifications" class="text-gray-300 hover:text-amber-400 transition duration-300">Certifications</a>
                 <a href="#projects" class="text-gray-300 hover:text-amber-400 transition duration-300">Projects</a>
+                <a href="#certifications" class="text-gray-300 hover:text-amber-400 transition duration-300">Certifications</a>
                 <a href="#contact" class="text-gray-300 hover:text-amber-400 transition duration-300">Contact</a>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-2xl text-white">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-white"><i class="fas fa-bars"></i></button>
         </div>
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
             <a href="#about" class="block py-2 text-gray-300 hover:text-amber-400">About</a>
             <a href="#resume" class="block py-2 text-gray-300 hover:text-amber-400">Resume</a>
-            <a href="#certifications" class="block py-2 text-gray-300 hover:text-amber-400">Certifications</a>
             <a href="#projects" class="block py-2 text-gray-300 hover:text-amber-400">Projects</a>
+            <a href="#certifications" class="block py-2 text-gray-300 hover:text-amber-400">Certifications</a>
             <a href="#contact" class="block py-2 text-gray-300 hover:text-amber-400">Contact</a>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/111827/111827?text=')">
-             <div class="absolute inset-0 bg-black/50"></div>
+        <section id="home" class="min-h-screen flex items-center bg-cover bg-center" style="background-color: #0c0a18;">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0c0a18] to-transparent"></div>
             <div class="container mx-auto px-6 text-left relative z-10">
-                <span class="text-amber-400 font-semibold uppercase tracking-widest">Hello!</span>
-                <h1 class="text-5xl md:text-7xl font-extrabold text-white mt-3 mb-4">I'm <span>Samhit Nayak</span></h1>
+                <span class="text-amber-400 font-semibold uppercase tracking-widest">Hello! I am</span>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mt-3 mb-4">
+                    <span class="gradient-text">Samhit Nayak</span>
+                </h1>
                 <h2 class="text-3xl md:text-4xl text-white font-bold">
                     <span id="typing-animation"></span><span class="typing-cursor"></span>
                 </h2>
                 <div class="mt-8 flex flex-wrap gap-4">
-                    <a href="Resume.pdf" download="Samhit_Nayak_Resume.pdf" class="bg-amber-500 text-gray-900 font-bold px-8 py-3 rounded-full shadow-lg hover:bg-amber-400 transition duration-300">Download Resume</a>
-                    <a href="https://github.com/samhit24" target="_blank" class="bg-transparent border-2 border-white text-white font-bold px-8 py-3 rounded-full shadow-lg hover:bg-white hover:text-gray-900 transition duration-300">My Works</a>
+                    <a href="Resume.pdf" download="Samhit_Nayak_Resume.pdf" class="bg-amber-500 text-gray-900 font-bold px-8 py-3 rounded-full shadow-lg hover:bg-amber-400 hover:scale-105 transform transition duration-300">Download Resume</a>
+                    <a href="https://github.com/samhit24" target="_blank" class="bg-transparent border-2 border-white text-white font-bold px-8 py-3 rounded-full shadow-lg hover:bg-white hover:text-gray-900 hover:scale-105 transform transition duration-300">My Works</a>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-24 bg-gray-800">
+        <section id="about" class="py-24 fade-in-section">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="md:col-span-1">
-                        <!-- Replace with your profile image -->
                         <img src="https://placehold.co/500x500/374151/d1d5db?text=Samhit+Nayak" alt="Samhit Nayak Profile Picture" class="rounded-lg shadow-2xl w-full">
                     </div>
                     <div class="md:col-span-1">
-                        <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
+                        <h2 class="text-4xl font-bold mb-4 gradient-text">About Me</h2>
                         <p class="leading-relaxed mb-6">
                             I am a driven Master of Computer Applications (MCA) student with a profound passion for Artificial Intelligence, specializing in Machine Learning, Deep Learning, and NLP. My goal is to leverage data-driven insights and intelligent algorithms to build software that solves real-world problems.
                         </p>
-                        <h3 class="text-xl font-bold text-white mb-4">My Skills</h3>
+                        <h3 class="text-2xl font-bold text-white mb-4">My Skills</h3>
                         <div class="space-y-4">
                             <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="font-semibold text-white">Python</span>
-                                    <span class="text-sm font-semibold text-amber-400">95%</span>
-                                </div>
-                                <div class="w-full bg-gray-600 rounded-full h-2.5">
-                                    <div class="bg-amber-500 h-2.5 rounded-full" style="width: 95%"></div>
-                                </div>
+                                <div class="flex justify-between mb-1"><span class="font-semibold text-white">Python</span><span class="text-sm font-semibold text-amber-400">95%</span></div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-amber-500 h-2.5 rounded-full skill-bar-fill" style="width: 95%"></div></div>
                             </div>
                             <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="font-semibold text-white">Machine Learning & Deep Learning</span>
-                                    <span class="text-sm font-semibold text-amber-400">90%</span>
-                                </div>
-                                <div class="w-full bg-gray-600 rounded-full h-2.5">
-                                    <div class="bg-amber-500 h-2.5 rounded-full" style="width: 90%"></div>
-                                </div>
+                                <div class="flex justify-between mb-1"><span class="font-semibold text-white">Machine Learning & Deep Learning</span><span class="text-sm font-semibold text-amber-400">90%</span></div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-amber-500 h-2.5 rounded-full skill-bar-fill" style="width: 90%"></div></div>
                             </div>
                             <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="font-semibold text-white">Data Science (Pandas, NumPy)</span>
-                                    <span class="text-sm font-semibold text-amber-400">90%</span>
-                                </div>
-                                <div class="w-full bg-gray-600 rounded-full h-2.5">
-                                    <div class="bg-amber-500 h-2.5 rounded-full" style="width: 90%"></div>
-                                </div>
+                                <div class="flex justify-between mb-1"><span class="font-semibold text-white">Data Science (Pandas, NumPy)</span><span class="text-sm font-semibold text-amber-400">90%</span></div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-amber-500 h-2.5 rounded-full skill-bar-fill" style="width: 90%"></div></div>
                             </div>
                              <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="font-semibold text-white">Java</span>
-                                    <span class="text-sm font-semibold text-amber-400">85%</span>
-                                </div>
-                                <div class="w-full bg-gray-600 rounded-full h-2.5">
-                                    <div class="bg-amber-500 h-2.5 rounded-full" style="width: 85%"></div>
-                                </div>
+                                <div class="flex justify-between mb-1"><span class="font-semibold text-white">Java</span><span class="text-sm font-semibold text-amber-400">85%</span></div>
+                                <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-amber-500 h-2.5 rounded-full skill-bar-fill" style="width: 85%"></div></div>
                             </div>
                         </div>
                     </div>
@@ -169,11 +164,10 @@
             </div>
         </section>
 
-        <!-- Resume Section -->
-        <section id="resume" class="py-24">
+        <section id="resume" class="py-24 fade-in-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-white">Resume</h2>
+                    <h2 class="text-4xl font-bold gradient-text">Resume</h2>
                     <p class="text-gray-400 mt-2">My professional and academic journey.</p>
                 </div>
                 <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
@@ -202,138 +196,101 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Certifications Section -->
-        <section id="certifications" class="py-24 bg-gray-800">
+
+        <section id="projects" class="py-24 fade-in-section">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-white">Certifications</h2>
+                    <h2 class="text-4xl font-bold gradient-text">My Projects</h2>
+                    <p class="text-gray-400 mt-2">A selection of my end-to-end work.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto" style="perspective: 1000px;">
+                    
+                    <div class="project-card glass-card rounded-lg shadow-lg overflow-hidden group">
+                        <div class="relative"><img src="brain-tumor-segmentation.jpg" alt="Brain Tumor Segmentation Project" class="w-full h-56 object-cover"><div class="absolute inset-0 bg-black/40"></div></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Medical Image Segmentation</h3>
+                            <p class="text-gray-400 text-sm mb-4">Implemented a U-Net, a specialized CNN, to perform semantic segmentation on MRI scans to identify and outline brain tumors.</p>
+                            <a href="https://github.com/samhit24/Brain-Tumor-Segmentation" target="_blank" class="text-amber-400 hover:text-amber-300 transition">View on GitHub &rarr;</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card glass-card rounded-lg shadow-lg overflow-hidden group">
+                        <div class="relative"><img src="fraud-detection.jpg" alt="Credit Card Fraud Detection Project" class="w-full h-56 object-cover"><div class="absolute inset-0 bg-black/40"></div></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Credit Card Fraud Detection</h3>
+                            <p class="text-gray-400 text-sm mb-4">Built a model to classify fraudulent transactions from a highly imbalanced dataset, focusing on techniques like SMOTE.</p>
+                            <a href="https://github.com/samhit24/Fraud-Detection-Project" target="_blank" class="text-amber-400 hover:text-amber-300 transition">View on GitHub &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card rounded-lg shadow-lg overflow-hidden group">
+                        <div class="relative"><img src="hate-speech.jpg" alt="Hate Speech Detection Project" class="w-full h-56 object-cover"><div class="absolute inset-0 bg-black/40"></div></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Hate Speech Detection</h3>
+                            <p class="text-gray-400 text-sm mb-4">Built an NLP-based hate speech detection system using MLOps pipelines to identify toxic content with high accuracy.</p>
+                            <a href="https://github.com/samhit24/hate-speech-mlops" target="_blank" class="text-amber-400 hover:text-amber-300 transition">View on GitHub &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card rounded-lg shadow-lg overflow-hidden group">
+                        <div class="relative"><img src="house-price-predictor.jpg" alt="House Price Predictor Project" class="w-full h-56 object-cover"><div class="absolute inset-0 bg-black/40"></div></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">End-to-End House Price Predictor</h3>
+                            <p class="text-gray-400 text-sm mb-4">Developed a regression model to accurately predict housing prices, achieving an R-squared score of 0.7144 with a Random Forest Regressor.</p>
+                            <a href="https://github.com/samhit24/house-price-predictor" target="_blank" class="text-amber-400 hover:text-amber-300 transition">View on GitHub &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-card rounded-lg shadow-lg overflow-hidden group">
+                        <div class="relative"><img src="sentimentanalysis.jpg" alt="Sentiment Analysis Project" class="w-full h-56 object-cover"><div class="absolute inset-0 bg-black/40"></div></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Kindle Reviews Sentiment Analysis</h3>
+                            <p class="text-gray-400 text-sm mb-4">Engineered an NLP model to classify thousands of customer reviews using TF-IDF vectorization and machine learning techniques.</p>
+                            <a href="https://github.com/samhit24/kindle-sentiment-analyzer" target="_blank" class="text-amber-400 hover:text-amber-300 transition">View on GitHub &rarr;</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="py-24 fade-in-section bg-[#111827]">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold gradient-text">Certifications</h2>
                     <p class="text-gray-400 mt-2">My credentials and official recognitions.</p>
                 </div>
                 <div class="max-w-3xl mx-auto grid md:grid-cols-1 gap-8">
-                    <!-- Certificate Card 1 -->
-                    <div class="bg-gray-700 rounded-lg shadow-lg p-6 flex items-center">
+                    <div class="glass-card rounded-lg shadow-lg p-6 flex items-center">
                         <div class="flex-shrink-0">
-                            <a href="java-dsa-certificate.pdf" target="_blank">
-                                <img src="apna-college-cert.jpg" alt="Apna College Certificate" class="h-24 w-auto rounded-md border-2 border-amber-400 hover:opacity-80 transition">
-                            </a>
+                            <a href="java-dsa-certificate.pdf" target="_blank"><img src="apna-college-cert.jpg" alt="Apna College Certificate" class="h-24 w-auto rounded-md border-2 border-amber-400 hover:opacity-80 transition"></a>
                         </div>
                         <div class="ml-6">
                             <h3 class="text-xl font-bold text-white">Alpha (DSA with Java)</h3>
                             <p class="text-gray-300">Apna College</p>
-                            <p class="text-sm text-gray-400 mt-1">Credential ID: 66dc32eb7ac7a6a9b50b5d7b</p>
                         </div>
                     </div>
-                    <!-- Certificate Card 2 -->
-                    <div class="bg-gray-700 rounded-lg shadow-lg p-6 flex items-center">
+                    <div class="glass-card rounded-lg shadow-lg p-6 flex items-center">
                         <div class="flex-shrink-0">
-                            <a href="prepinsta-ml-cert.pdf" target="_blank">
-                                <img src="prepinsta-ml-cert.jpg" alt="PrepInsta ML & AI Certificate" class="h-24 w-auto rounded-md border-2 border-amber-400 hover:opacity-80 transition">
-                            </a>
+                            <a href="prepinsta-ml-cert.pdf" target="_blank"><img src="prepinsta-ml-cert.jpg" alt="PrepInsta ML & AI Certificate" class="h-24 w-auto rounded-md border-2 border-amber-400 hover:opacity-80 transition"></a>
                         </div>
                         <div class="ml-6">
                             <h3 class="text-xl font-bold text-white">Machine Learning & AI</h3>
                             <p class="text-gray-300">PrepInsta</p>
-                            <p class="text-sm text-gray-400 mt-1">Credential ID: 67cddae5a5360158b4bedb8f</p>
-                        </div>
-                    </div>
-                    <!-- Certificate Card 3 -->
-                    <div class="bg-gray-700 rounded-lg shadow-lg p-6 flex items-center">
-                        <div class="flex-shrink-0">
-                            <a href="prepinsta-dbms-cert.pdf" target="_blank">
-                                <img src="prepinsta-dbms-cert.jpg" alt="PrepInsta DBMS Certificate" class="h-24 w-auto rounded-md border-2 border-amber-400 hover:opacity-80 transition">
-                            </a>
-                        </div>
-                        <div class="ml-6">
-                            <h3 class="text-xl font-bold text-white">DBMS</h3>
-                            <p class="text-gray-300">PrepInsta</p>
-                            <p class="text-sm text-gray-400 mt-1">Credential ID: 6898f938e950dc3559edae0a</p>
-                        </div>
-                    </div>
-                    <!-- Certificate Card 4 -->
-                    <div class="bg-gray-700 rounded-lg shadow-lg p-6 flex items-center">
-                        <div class="flex-shrink-0">
-                            <a href="prepinsta-java-cert.pdf" target="_blank">
-                                <img src="prepinsta-java-cert.jpg" alt="PrepInsta Intermediate Java Certificate" class="h-24 w-auto rounded-md border-2 border-amber-400 hover:opacity-80 transition">
-                            </a>
-                        </div>
-                        <div class="ml-6">
-                            <h3 class="text-xl font-bold text-white">Intermediate Coding in Java</h3>
-                            <p class="text-gray-300">PrepInsta</p>
-                            <p class="text-sm text-gray-400 mt-1">Credential ID: 67769d193f98ed8a75785992</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-white">Projects</h2>
-                    <p class="text-gray-400 mt-2">A selection of my work.</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                    <!-- Project Card 1 -->
-                    <div class="project-card bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                        <div class="relative">
-                            <!-- Replace this with your project image -->
-                            <img src="house-price-predictor.jpg" alt="House Price Predictor Project" class="w-full h-64 object-cover">
-                            <div class="overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                <a href="https://github.com/samhit24/house-price-predictor" target="_blank" class="text-white border-2 border-amber-400 px-6 py-2 rounded-full hover:bg-amber-400 hover:text-black transition">View on GitHub</a>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">End-to-End House Price Predictor</h3>
-                            <p class="text-gray-400">Developed a regression model to accurately predict housing prices, achieving an R-squared score of 0.7144 with a Random Forest Regressor.</p>
-                        </div>
-                    </div>
-                    <!-- Project Card 2 -->
-                    <div class="project-card bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                        <div class="relative">
-                             <!-- Replace this with your project image -->
-                            <img src="sentimentanalysis.jpg" alt="Sentiment Analysis Project" class="w-full h-64 object-cover">
-                             <div class="overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                <a href="https://github.com/samhit24/kindle-sentiment-analyzer" target="_blank" class="text-white border-2 border-amber-400 px-6 py-2 rounded-full hover:bg-amber-400 hover:text-black transition">View on GitHub</a>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Kindle Reviews Sentiment Analysis</h3>
-                            <p class="text-gray-400">Engineered an NLP model to classify thousands of customer reviews using TF-IDF vectorization and machine learning techniques.</p>
-                        </div>
-                    </div>
-                    <!-- Project Card 3 -->
-                    <div class="project-card bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-                        <div class="relative">
-                            <!-- Replace this with your project image -->
-                            <img src="hate-speech.jpg" alt="Hate Speech Detection Project" class="w-full h-64 object-cover">
-                            <div class="overlay absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                <a href="https://github.com/samhit24/hate-speech-mlops" target="_blank" class="text-white border-2 border-amber-400 px-6 py-2 rounded-full hover:bg-amber-400 hover:text-black transition">View on GitHub</a>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">Hate Speech Detection</h3>
-                            <p class="text-gray-400">Built an NLP-based hate speech detection system using MLOps pipelines, integrating advanced text classification models to identify toxic content with high accuracy.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 bg-gray-800">
+        <section id="contact" class="py-24 fade-in-section">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold text-white">Contact Me</h2>
+                <h2 class="text-4xl font-bold gradient-text">Get In Touch</h2>
                 <p class="text-gray-400 mt-2 mb-8 max-w-xl mx-auto">
                     I'm currently seeking new opportunities. Feel free to reach out if you have a question or just want to connect.
                 </p>
-                <div class="flex justify-center items-center space-x-6 text-lg">
-                    <p class="flex items-center"><i class="fas fa-envelope mr-2 text-amber-400"></i> samhit563@gmail.com</p>
-                    <p class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-amber-400"></i> Bengaluru, India</p>
-                </div>
                 <div class="mt-10">
-                    <a href="mailto:samhit563@gmail.com" class="bg-amber-500 text-gray-900 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 text-lg inline-block">
+                    <a href="mailto:samhit53@gmail.com" class="bg-amber-500 text-gray-900 font-bold px-8 py-4 rounded-full shadow-lg hover:bg-amber-400 hover:scale-105 transform transition duration-300 text-lg inline-block">
                         Say Hello
                     </a>
                 </div>
@@ -341,8 +298,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-6">
+    <footer class="bg-black/30 text-gray-400 py-6">
         <div class="container mx-auto px-6 text-center">
              <div class="mb-4 flex justify-center space-x-6 text-2xl">
                 <a href="https://in.linkedin.com/in/samhit-nayak-a2a70a263" target="_blank" class="hover:text-amber-400 transition duration-300"><i class="fab fa-linkedin"></i></a>
@@ -353,54 +309,30 @@
     </footer>
 
     <script>
-        // JavaScript for mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
         const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
-        for (let link of mobileMenuLinks) {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        }
+        for (let link of mobileMenuLinks) { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); }); }
         
-        // JavaScript for Typing Animation
         const typingAnimationElement = document.getElementById('typing-animation');
-        const typingTexts = [
-            'Machine Learning Engineer',
-            'Python Developer',
-            'Data Scientist',
-            'AI Enthusiast'
-        ];
-        let textIndex = 0;
-        let charIndex = 0;
+        const typingTexts = ['Machine Learning Engineer', 'Python Developer', 'Data Scientist', 'AI Enthusiast'];
+        let textIndex = 0; let charIndex = 0;
+        function type() { if (charIndex < typingTexts[textIndex].length) { typingAnimationElement.textContent += typingTexts[textIndex].charAt(charIndex); charIndex++; setTimeout(type, 100); } else { setTimeout(erase, 2000); } }
+        function erase() { if (charIndex > 0) { typingAnimationElement.textContent = typingTexts[textIndex].substring(0, charIndex - 1); charIndex--; setTimeout(erase, 50); } else { textIndex = (textIndex + 1) % typingTexts.length; setTimeout(type, 500); } }
+        document.addEventListener('DOMContentLoaded', function() { setTimeout(type, 500); });
 
-        function type() {
-            if (charIndex < typingTexts[textIndex].length) {
-                typingAnimationElement.textContent += typingTexts[textIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(type, 100);
-            } else {
-                setTimeout(erase, 2000);
-            }
-        }
-
-        function erase() {
-            if (charIndex > 0) {
-                typingAnimationElement.textContent = typingTexts[textIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(erase, 50);
-            } else {
-                textIndex = (textIndex + 1) % typingTexts.length;
-                setTimeout(type, 500);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(type, 500);
-        });
+        // Scroll Animation Logic
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => { observer.observe(section); });
     </script>
 </body>
 </html>
